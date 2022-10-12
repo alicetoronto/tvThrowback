@@ -264,10 +264,6 @@ html {
     overflow: hidden;
 }
 
-/* * {
-    border: solid red 1px;
-} */
-
 html {
     font-size: 125%;
 }
@@ -282,14 +278,24 @@ body {
     min-height: 100vh;
 }
 
+.wrapper {
+    max-width: 1250px;
+    width: 90%;
+    margin: 0 auto;
+}
+
 h1 {
     color: rgb(230, 171, 24);
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 0.9375rem + 6.25vw, 3rem);
     text-align: center;
     font-style: italic;
     text-shadow: 2px 5px black;
+}
+
+h2 {
+    display: none;
 }
 
 a {
@@ -316,11 +322,13 @@ a:visited {
 .searchArea {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 300px;
 }
 
 .searchArea p {
     text-align: center;
+    text-transform: uppercase;
 }
 
 label {
@@ -329,41 +337,40 @@ label {
     text-transform: uppercase;
 }
 
-input[type="text"] {
+input[type="text"],
+.search {
     width: 300px;
     height: 35px;
-    margin-bottom: 10px;
     border-radius: 5px;
+}
+
+input[type="text"] {
+    margin-bottom: 10px;
     color: #000;
 }
 
 .search {
     background-color: rgb(248, 181, 10);
     color: rgb(65, 63, 63);
-    border-radius: 5px;
     padding: 5px;
-    width: 300px;
-    height: 35px;
     text-transform: uppercase;
     font-style: italic;
     font-weight: bold;
 }
 
-
 input::placeholder {
     color: rgb(163, 161, 161);
-}
-
-li {
-    list-style: none;
+    text-align: center;
 }
 
 ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* min-height: 75vh; */
-    /* margin-top: 75px; */
+}
+
+li {
+    list-style: none;
 }
 
 .showResultBox {
@@ -372,6 +379,7 @@ ul {
     padding: 20px;
     width: calc(100% / 5);
     min-width: 250px;
+    height: 410px;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
@@ -397,9 +405,33 @@ ul {
 
 footer {
     text-align: center;
-    margin-top: 100px;
 }
 
 footer p {
     margin: 0;
+}
+
+@media (max-width: 600px) {
+    .searchArea p {
+        display: none;
+    }
+
+    h2 {
+        display: block;
+        font-size: clamp(1rem, -0.0625rem + 6.25vw, 2rem);
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .tv {
+        min-width: 300px;
+        width: 80vw;
+        height: 70vw;
+    }
+
+    input[type="text"],
+    .search {
+        width: 250px;
+        text-align: center;
+    }
 }
