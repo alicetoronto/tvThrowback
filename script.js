@@ -22,7 +22,7 @@ app.calcAge = function (e) {
 };
 
 app.displayAlert = function () {
-    app.$results.on("click", ".imgButton", function (e) { //attach event listener to parent element that is already loaded onto the page and on click of the child element that gets loaded later, will trigger action
+    app.$results.on("click keypress", ".imgButton", function (e) { //attach event listener to parent element that is already loaded onto the page and on click of the child element that gets loaded later, will trigger action
         const age = app.calcAge(e);
         if (age >= 0) {
             alert(`You were ${age} years old when '${e.target.getAttribute("dataName")}' first aired!`);
@@ -35,7 +35,14 @@ app.displayAlert = function () {
 
 app.displayShows = function (showResults) {
     showResults.forEach(function (showResult) {
-        const img = showResult.show.image ? `<button class="imgButton" dataYear="${showResult.show.premiered.slice(0, 4)}" dataName="${showResult.show.name}"><img src="${showResult.show.image.medium}" alt="${showResult.show.name}"></button>` : `<button class="imgButton" dataYear="${showResult.show.premiered.slice(0, 4)}" dataName="${showResult.show.name}"><p class="noImage">no image exists but you can still click here to find out your age at the time this show first aired</p></button>`;
+        const img = showResult.show.image ?
+            `<div class="imgButton" dataYear="${showResult.show.premiered.slice(0, 4)}" dataName="${showResult.show.name}" tabindex="0">
+                <img src="${showResult.show.image.medium}" alt="${showResult.show.name}">
+            </div>`
+            :
+            `<div class="imgButton" dataYear="${showResult.show.premiered.slice(0, 4)}" dataName="${showResult.show.name}" tabindex="0">
+                <p class="noImage">no image exists but you can still click here to find out your age at the time this show first aired</p>
+            </div>`;
 
         const resultHTML = `
                 <li class="showResultBox">
